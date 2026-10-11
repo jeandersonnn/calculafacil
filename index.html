@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<link rel="stylesheet" href="style.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculadoras gratuitas para porcentagem, descontos e muito mais.">
+  <title>Calcula Fácil - Calculadoras Gratuitas</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #243047;
+    }
+
+    header {
+      background: #173b70;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+
+    .boas-vindas {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .calculadoras {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px #0000000d;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #173b70;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #ccd3df;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: 0;
+      border-radius: 7px;
+      background: #176b4d;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #10543b;
+    }
+
+    .resultado {
+      margin-top: 12px;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #5d6879;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Calcula Fácil</h1>
+    <p>Ferramentas gratuitas para facilitar seu dia.</p>
+  </header>
+
+  <main>
+    <section class="boas-vindas">
+      <h2>Calculadoras gratuitas</h2>
+      <p>Escolha uma ferramenta e faça sua conta em segundos.</p>
+    </section>
+
+    <section class="calculadoras">
+      <article class="card">
+        <h3>Calculadora de porcentagem</h3>
+        <label for="valor">Valor</label>
+        <input id="valor" type="number" min="0" step="any" placeholder="Ex.: 200">
+
+        <label for="porcentagem">Porcentagem (%)</label>
+        <input id="porcentagem" type="number" min="0" step="any" placeholder="Ex.: 15">
+
+        <button onclick="calcularPorcentagem()">Calcular</button>
+        <p class="resultado" id="resultadoPorcentagem" aria-live="polite"></p>
+      </article>
+
+      <article class="card">
+        <h3>Calculadora de desconto</h3>
+        <label for="preco">Preço do produto (R$)</label>
+        <input id="preco" type="number" min="0" step="any" placeholder="Ex.: 100">
+
+        <label for="desconto">Desconto (%)</label>
+        <input id="desconto" type="number" min="0" max="100" step="any" placeholder="Ex.: 20">
+
+        <button onclick="calcularDesconto()">Calcular desconto</button>
+        <p class="resultado" id="resultadoDesconto" aria-live="polite"></p>
+      </article>
+      <article class="card">
+        <h3>Calculadora de lucro</h3>
+
+        <label for="custo">Custo do produto (R$)</label>
+        <input id="custo" type="number" min="0" step="any" placeholder="Ex.: 50">
+
+        <label for="venda">Preço de venda (R$)</label>
+        <input id="venda" type="number" min="0" step="any" placeholder="Ex.: 80">
+
+        <button onclick="calcularLucro()">Calcular lucro</button>
+        <p class="resultado" id="resultadoLucro" aria-live="polite"></p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>Calcula Fácil · Ferramentas gratuitas</p>
+  </footer>
+
+  <script>
+    const moeda = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL"
+    });
+
+    function calcularPorcentagem() {
+      const valor = Number(document.getElementById("valor").value);
+      const porcentagem = Number(document.getElementById("porcentagem").value);
+      const resultado = document.getElementById("resultadoPorcentagem");
+
+      if (
+        document.getElementById("valor").value.trim() === "" ||
+        document.getElementById("porcentagem").value.trim() === "" ||
+        !Number.isFinite(valor) ||
+        !Number.isFinite(porcentagem) ||
+        valor < 0 ||
+        porcentagem < 0
+      ) {
+        resultado.textContent = "Digite valores válidos, iguais ou maiores que zero.";
+        return;
+      }
+
+      resultado.textContent =
+        porcentagem + "% de " + moeda.format(valor) +
+        " = " + moeda.format(valor * porcentagem / 100);
+    }
+
+    function calcularDesconto() {
+      const preco = Number(document.getElementById("preco").value);
+      const desconto = Number(document.getElementById("desconto").value);
+      const resultado = document.getElementById("resultadoDesconto");
+
+      if (
+        document.getElementById("preco").value.trim() === "" ||
+        document.getElementById("desconto").value.trim() === "" ||
+        !Number.isFinite(preco) ||
+        !Number.isFinite(desconto) ||
+        preco < 0 ||
+        desconto < 0 ||
+        desconto > 100
+      ) {
+        resultado.textContent = "Informe um preço válido e um desconto entre 0% e 100%.";
+        return;
+      }
+
+      const economia = preco * desconto / 100;
+      const total = preco - economia;
+
+      resultado.textContent =
+        "Você economiza " + moeda.format(economia) +
+        ". Preço final: " + moeda.format(total);
+    }
+
+    function calcularLucro() {
+      const custoCampo = document.getElementById("custo");
+      const vendaCampo = document.getElementById("venda");
+      const resultado = document.getElementById("resultadoLucro");
+
+      const custo = Number(custoCampo.value);
+      const venda = Number(vendaCampo.value);
+
+      if (custoCampo.value.trim() === "" || vendaCampo.value.trim() === "") {
+        resultado.textContent = "Digite o custo e o preço de venda.";
+        return;
+      }
+
+      const lucro = venda - custo;
+
+      if (lucro > 0) {
+        resultado.textContent = "Seu lucro é de " + moeda.format(lucro) + ".";
+      } else if (lucro < 0) {
+        resultado.textContent = "Você teve prejuízo de " + moeda.format(Math.abs(lucro)) + ".";
+      } else {
+        resultado.textContent = "Você não teve lucro nem prejuízo.";
+      }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f6fb;
+  color: #263247;
+}
+
+header {
+  background: linear-gradient(135deg, #1456a0, #2478d4);
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+header h1 {
+  margin: 0 0 10px;
+  font-size: 36px;
+}
+
+header p {
+  margin: 0;
+  font-size: 17px;
+}
+
+main {
+  width: min(1000px, 92%);
+  margin: 35px auto;
+}
+
+.calculadoras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(20, 50, 90, 0.08);
+  border: 1px solid #e4eaf2;
+}
+
+.card h3 {
+  color: #1456a0;
+  margin-top: 0;
+  font-size: 21px;
+}
+
+label {
+  display: block;
+  margin: 15px 0 7px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccd5e2;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+input:focus {
+  outline: 2px solid #83b9f5;
+  border-color: #2478d4;
+}
+
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #159447;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #10783a;
+}
+
+.resultado {
+  margin-bottom: 0;
+  font-weight: bold;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 29px;
+  }
+
+  main {
+    margin: 22px auto;
+  }
+}
